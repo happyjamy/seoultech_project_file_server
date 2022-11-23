@@ -8,11 +8,12 @@ import {
   Delete,
   UseInterceptors,
   UploadedFiles,
+  Req,
 } from '@nestjs/common';
 import { FileService } from './file.service';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
-import { AnyFilesInterceptor } from '@nestjs/platform-express/multer';
+import { AnyFilesInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('file')
 export class FileController {
@@ -20,7 +21,7 @@ export class FileController {
 
   @Post()
   @UseInterceptors(AnyFilesInterceptor())
-  uploadImage(@UploadedFiles() files: Array<Express.Multer.File>) {
+  uploadImage(@Req() body, @UploadedFiles() files: Array<Express.Multer.File>) {
     return this.fileService.uploadImage(files);
   }
 
