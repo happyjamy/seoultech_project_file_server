@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFiles,
+} from '@nestjs/common';
 import { FileService } from './file.service';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
@@ -10,14 +20,8 @@ export class FileController {
 
   @Post()
   @UseInterceptors(AnyFilesInterceptor())
-  uploadPicture(@UploadedFiles(
-    new ParseFilePipe({
-    validators: [
-      new FileTypeValidator({ fileType: 'jpeg' }),
-    ],
-  }),
-) files: Array<Express.Multer.File>) {
-    return this.fileService.uploadPicture();
+  uploadImage(@UploadedFiles() files: Array<Express.Multer.File>) {
+    return this.fileService.uploadImage(files);
   }
 
   @Post()

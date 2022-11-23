@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UploadedFile } from '@nestjs/common';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
 
 @Injectable()
 export class FileService {
+  uploadImage(files) {
+    return files;
+  }
+
   create(createFileDto: CreateFileDto) {
     return 'This action adds a new file';
   }
