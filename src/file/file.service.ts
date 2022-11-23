@@ -1,11 +1,16 @@
-import { Injectable, UploadedFile } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
+import { createImageUrl } from './multer_opts/create_url';
 
 @Injectable()
 export class FileService {
   uploadImage(files) {
-    return files;
+    const imageUrls = files.map((file) => {
+      return createImageUrl(file);
+    });
+
+    return imageUrls;
   }
 
   create(createFileDto: CreateFileDto) {
