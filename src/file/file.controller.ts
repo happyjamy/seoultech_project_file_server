@@ -22,6 +22,7 @@ export class FileController {
   @Post()
   @UseInterceptors(AnyFilesInterceptor(multerOpt))
   uploadImage(@UploadedFiles() files: Array<Express.Multer.File>) {
+    console.log(files);
     return this.fileService.uploadImage(files);
   }
 
