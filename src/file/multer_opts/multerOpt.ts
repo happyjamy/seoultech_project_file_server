@@ -1,12 +1,12 @@
 import { existsSync, mkdirSync } from 'fs';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { uuid4 } from 'uuid4';
+import { v4 as uuid } from 'uuid';
 
 export const multerOpt = {
   storage: diskStorage({
     destination: (request, file, cb) => {
-      const uploadPath = 'public';
+      const uploadPath = 'file/public';
 
       if (!existsSync(uploadPath)) {
         mkdirSync(uploadPath);
@@ -16,8 +16,8 @@ export const multerOpt = {
     },
 
     filename: (request, file, callback) => {
-      const uuid = uuid4();
-      const saveName = `${uuid}${extname(file.originalname)}`;
+      const uuid44 = uuid();
+      const saveName = `${uuid44}${extname(file.originalname)}`;
       callback(null, saveName);
     },
   }),
